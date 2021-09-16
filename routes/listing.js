@@ -36,7 +36,8 @@ router.put("/:listingId", verify, async (req, res) => {
             { _id: req.params.listingId },
             listing
         );
-        res.json(updatedlistings);
+        const listings = await Listing.findById(req.params.listingId);
+        res.json({message: "Data Updated Successfully", data: listings});
     } catch(error){
         res.json({message: error});
     }
@@ -46,7 +47,7 @@ router.put("/:listingId", verify, async (req, res) => {
 router.delete("/:listingId", verify, async (req, res) => {
     try{
         const removeListing = await Listing.findByIdAndDelete(req.params.listingId);
-        res.json(removeListing);
+        res.json({message: "Data Deleted Successfully", data: removeListing});
     } catch(error){
         res.json({message: error});
     }
@@ -62,11 +63,12 @@ router.post("/", verify, async (req, res) => {
     });
     try{
         const savedListing = await listing.save();
-        res.send(savedListing);
+        //res.send(savedListing);
+        res.send({message: "Data Added Successfully", data: savedListing});
     } catch(error){
         res.status(400).send(error);
     }
-    res.send('Add New Listings');
+    //res.send('Add New Listings');
 });
 
 module.exports = router;
