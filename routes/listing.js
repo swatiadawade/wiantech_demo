@@ -6,7 +6,8 @@ const Listing = require("../model/listing");
 router.get("/", verify, async (req, res) => {
     try{
         const listings = await Listing.find();
-        res.json(listings);
+        //res.json(listings);
+        res.json({totalCount:listings.length, data: listings});
     } catch(error){
         res.json({message: error});
     }
