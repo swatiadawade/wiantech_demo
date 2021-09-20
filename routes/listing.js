@@ -23,7 +23,7 @@ router.get("/:listingId", verify, async (req, res) => {
     }
 });
 
-//Update Listing
+//Update Listing api
 router.put("/:listingId", verify, async (req, res) => {
     try{
         const listing = {
@@ -43,7 +43,7 @@ router.put("/:listingId", verify, async (req, res) => {
     }
 });
 
-//Delete Listing
+//Delete Listing api
 router.delete("/:listingId", verify, async (req, res) => {
     try{
         const removeListing = await Listing.findByIdAndDelete(req.params.listingId);
